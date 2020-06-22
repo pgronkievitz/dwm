@@ -11,13 +11,14 @@ static const unsigned int snap = 32;    /* snap pixel */
 static const unsigned int gappx = 0;    /* pixel gap between clients */
 static const int showbar = 1;           /* 0 means no bar */
 static const int topbar = 1;            /* 0 means bottom bar */
-static const int horizpadbar = 0;       /* horizontal padding for statusbar */
+static const int horizpadbar = 7;       /* horizontal padding for statusbar */
 static const int vertpadbar = 7;        /* vertical padding for statusbar */
-static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
+static const int swallowfloating = 1;   /* 1 means swallow floating windows by default */
 static const char *fonts[] = {
     "Hurmit Nerd Font Mono:size=10:antialias=true:autohint=true",
     "Hack:size=10:antialias=true:autohint=true",
-    "JoyPixels:size=10:antialias=true:autohint=true"};
+    "JoyPixels:size=10:antialias=true:autohint=true"
+};
 static const char col_gray1[] = "#262626";
 static const char col_gray2[] = "#262626"; /* border color unfocused windows */
 static const char col_gray4[] = "#d0d0d0";
@@ -47,21 +48,18 @@ static const Rule rules[] = {
      *	WM_CLASS(STRING) = instance, class
      *	WM_NAME(STRING) = title
      */
-    /* class      instance    title       tags mask     isfloating   monitor */
+    /* class      instance    title       tags mask     isfloating is_terminal     noswallow  monitor */
     // { "Gimp",     NULL,       NULL,       0,            1,           -1 },
-    {"Brave-browser",     NULL,  NULL,  1 << 1,  0, 1},   
-    {"qutebrowser",       NULL,  NULL,  1 << 1,  0, 1},   
-    {"TelegramDesktop",   NULL,  NULL,  1 << 2,  0, 1},   
-    {"MEGAsync",          NULL,  NULL,  NULL  ,  1, -1},  
-    {"Spotify",           NULL,  NULL,  1 << 4,  0, 1},   
-    {"Todoist",           NULL,  NULL,  1 << 5,  0, 1},   
+    {"Brave-browser",     NULL,  NULL,  1 << 1, 0, 0, 0, 1},   
+    {"TelegramDesktop",   NULL,  NULL,  1 << 2, 0, 0, 0, 1},   
+    {"MEGAsync",          NULL,  NULL,  NULL  , 0, 0, 1, -1},  
+    {"Spotify",           NULL,  NULL,  1 << 4, 0, 0, 0, 1},   
 };
 
 /* layout(s) */
-static const float mfact = 0.50; /* factor of master area size [0.05..0.95] */
+static const float mfact = 0.60; /* factor of master area size [0.05..0.95] */
 static const int nmaster = 1;    /* number of clients in master area */
-static const int resizehints =
-    0; /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0; /* 1 means respect size hints in tiled resizals */
 
 #include "layouts.c"
 static const Layout layouts[] = {
