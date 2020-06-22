@@ -54,6 +54,7 @@ static const Rule rules[] = {
     {"TelegramDesktop",   NULL,  NULL,  1 << 2, 0, 0, 0, 1},   
     {"MEGAsync",          NULL,  NULL,  NULL  , 0, 0, 1, -1},  
     {"Spotify",           NULL,  NULL,  1 << 4, 0, 0, 0, 1},   
+    {NULL,                NULL,  "Event Tester",  0, 0, 0, 1, -1},   
 };
 
 /* layout(s) */
