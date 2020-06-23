@@ -138,9 +138,10 @@ static Key keys[] = {
     {MODKEY | Mod1Mask, XK_n, spawn, CMD("st -e newsboat")}, // newsboat
     {MODKEY | Mod1Mask, XK_r, spawn, CMD("st -e tuir --enable-media")}, // reddit
     {MODKEY | Mod1Mask, XK_m, spawn, CMD("spotify")}, // spotify
-    {MODKEY | Mod1Mask, XK_t, spawn, CMD("todoist")}, // todoist
     {MODKEY | Mod1Mask, XK_s, spawn, CMD("settings")},
     {MODKEY | Mod1Mask, XK_w, spawn, CMD("st -e weather")},
+    {MODKEY | ShiftMask,XK_n, spawn, CMD("brave roamresearch.com")},
+    {MODKEY | ShiftMask,XK_b, spawn, CMD("brave blog.gronkiewicz.xyz")},
 
     /* Dmenu scripts launched with ALT + CTRL + KEY */
     {MODKEY, XK_z, spawn, CMD("zathura")},
