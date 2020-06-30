@@ -50,11 +50,13 @@ static const Rule rules[] = {
      */
     /* class      instance    title       tags mask     isfloating is_terminal     noswallow  monitor */
     // { "Gimp",     NULL,       NULL,       0,            1,           -1 },
-    {"Brave-browser",     NULL,  NULL,  1 << 1, 0, 0, 0, 1},   
-    {"TelegramDesktop",   NULL,  NULL,  1 << 2, 0, 0, 0, 1},   
-    {"MEGAsync",          NULL,  NULL,  NULL  , 0, 0, 1, -1},  
-    {"Spotify",           NULL,  NULL,  1 << 4, 0, 0, 0, 1},   
-    {NULL,                NULL,  "Event Tester",  0, 0, 0, 1, -1},   
+    {"Brave-browser",     NULL,  NULL,               1 << 1, 0, 0, 0,  1},   
+    {"TelegramDesktop",   NULL,  NULL,               1 << 2, 0, 0, 0,  1},   
+    {"MEGAsync",          NULL,  NULL,               NULL  , 0, 0, 1, -1},  
+    {NULL,                NULL,  "Spotify Premium",  1 << 4, 0, 0, 0,  1},   
+    {NULL,                NULL,  "Ao",               1 << 5, 0, 0, 0,  1},   
+    {NULL,                NULL,  "Tusk",             1 << 5, 0, 0, 0,  1},   
+    {NULL,                NULL,  "Event Tester",     0,      0, 0, 1, -1},   
 };
 
 /* layout(s) */
