@@ -138,7 +138,6 @@ static Key keys[] = {
     /* Apps Launched with SUPER + ALT + KEY */
     {MODKEY | Mod1Mask, XK_h, spawn, CMD("st -e ytop")}, // task manager
     {MODKEY | Mod1Mask, XK_n, spawn, CMD("st -e newsboat")}, // newsboat
-    {MODKEY | Mod1Mask, XK_r, spawn, CMD("st -e tuir --enable-media")}, // reddit
     {MODKEY | Mod1Mask, XK_m, spawn, CMD("spotify")}, // spotify
     {MODKEY | Mod1Mask, XK_s, spawn, CMD("settings")},
     {MODKEY | Mod1Mask, XK_w, spawn, CMD("st -e weather")},
