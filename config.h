@@ -24,8 +24,8 @@ static const char col_gray2[] = "#262626"; /* border color unfocused windows */
 static const char col_gray4[] = "#d0d0d0";
 static const char col_cyan[] =
     "#00afaf"; /* border color focused windows and tags */
-static const unsigned int baralpha = 0xd0;
-static const unsigned int borderalpha = 0xcc;
+static const unsigned int baralpha = 0xff;
+static const unsigned int borderalpha = 0xff;
 static const char *colors[][3] = {
     /*               fg         bg         border   */
     [SchemeNorm] = {"#ABB2BF", "#1E2127", "#61AFEF"},
@@ -136,16 +136,12 @@ static Key keys[] = {
 
     /* Apps Launched with SUPER + ALT + KEY */
     {MODKEY | Mod1Mask, XK_h, spawn, CMD("st -e ytop")}, // task manager
-    {MODKEY | Mod1Mask, XK_n, spawn, CMD("st -e newsboat")}, // newsboat
     {MODKEY | Mod1Mask, XK_m, spawn, CMD("spotify")}, // spotify
-    {MODKEY | Mod1Mask, XK_s, spawn, CMD("settings")},
-    {MODKEY | Mod1Mask, XK_w, spawn, CMD("st -e weather")},
-    {MODKEY | ShiftMask,XK_n, spawn, CMD("brave roamresearch.com")},
-    {MODKEY | ShiftMask,XK_b, spawn, CMD("brave blog.gronkiewicz.xyz")},
 
     /* Dmenu scripts launched with ALT + CTRL + KEY */
     {MODKEY, XK_z, spawn, CMD("zathura")},
     {MODKEY, XK_w, spawn, CMD("$BROWSER")},
+    {MODKEY, XK_e, spawn, CMD("dmenuunicode")},
     {Mod1Mask | ControlMask, XK_l, spawn, CMD("slock")},
     {Mod1Mask | ControlMask, XK_s, spawn, CMD("st -e BROWSER=w3m ddgr $(dmenu -p \"Search\")")},
     {Mod1Mask | ControlMask | ShiftMask, XK_l, spawn, CMD("/home/pg/.local/bin/dpower")},
@@ -165,14 +161,14 @@ static Key keys[] = {
     TAGKEYS(XK_9, 8)
     {MODKEY | ShiftMask, XK_q, quit, {0}},
     {MODKEY | ShiftMask, XK_r, quit, {1}},
-    {0, XF86XK_AudioMute, spawn, CMD("/usr/bin/pactl set-s 12ink-mute 0 toggle && pkill -RTMIN+12 dwmblocks")},
-    {0, XF86XK_AudioRaiseVolume, spawn, CMD("vol --up && pkill -RTMIN+12 dwmblocks")},
-    {0, XF86XK_AudioLowerVolume, spawn, CMD("vol --down && pkill -RTMIN+12 dwmblocks")},
-    {0, XF86XK_AudioMute, spawn, CMD("pamixer -t && pkill -RTMIN+12 dwmblocks")},
-    {0, XK_Print, spawn, {.v = screenshot}}, {ControlMask, XK_Print, spawn, {.v = ssselect}},
-    {0, XF86XK_MonBrightnessUp, spawn, CMD("brightness --up && pkill -RTMIN+11 dwmblocks")},
+    {0, XF86XK_AudioMute, spawn,  CMD("/usr/bin/pactl set-s 12ink-mute 0 toggle && pkill -RTMIN+12 dwmblocks")},
+    {0, XF86XK_AudioRaiseVolume,  spawn, CMD("amixer set Master 5%+ && pkill -RTMIN+12 dwmblocks")},
+    {0, XF86XK_AudioLowerVolume,  spawn, CMD("amixer set Master 5%- && pkill -RTMIN+12 dwmblocks")},
+    {0, XF86XK_AudioMute,         spawn, CMD("amixer set Master toggle && pkill -RTMIN+12 dwmblocks")},
+    {0, XK_Print,                 spawn, {.v = screenshot}}, {ControlMask, XK_Print, spawn, {.v = ssselect}},
+    {0, XF86XK_MonBrightnessUp,   spawn, CMD("brightness --up && pkill -RTMIN+11 dwmblocks")},
     {0, XF86XK_MonBrightnessDown, spawn, CMD("brightness --down && pkill -RTMIN+11 dwmblocks")},
-    {0, XF86XK_TouchpadToggle, spawn, CMD("touchpad-toggle")},
+    {0, XF86XK_TouchpadToggle,    spawn, CMD("touchpad-toggle")},
 };
 
 /* button definitions */
