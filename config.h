@@ -87,62 +87,54 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "1"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {"dmenu_run", "-p", "Run", NULL};
 static const char *termcmd[] = {"st", NULL};
-static const char *screenshot[] = {"wscr", "-f", NULL};
-static const char *ssselect[] = {"wscr", NULL};
 
 static Key keys[] = {
-    /* modifier             key        function        argument */
-    {MODKEY, XK_d, spawn, {.v = dmenucmd}}, // dmenu
-    {MODKEY, XK_Return, spawn, {.v = termcmd}}, // terminal
-    {MODKEY, XK_b, togglebar, {0}},
-    {MODKEY | ShiftMask, XK_j, rotatestack, {.i = +1}},
-    {MODKEY | ShiftMask, XK_k, rotatestack, {.i = -1}},
-    {MODKEY, XK_j, focusstack, {.i = +1}},
-    {MODKEY, XK_k, focusstack, {.i = -1}},
-    {MODKEY, XK_i, incnmaster, {.i = +1}},
-    {MODKEY, XK_u, incnmaster, {.i = -1}},
-    {MODKEY | ControlMask, XK_h, setmfact, {.f = -0.05}},
-    {MODKEY | ControlMask, XK_l, setmfact, {.f = +0.05}},
-    {MODKEY | ControlMask, XK_Return, zoom, {0}},
-    {MODKEY | ControlMask, XK_Tab, view, {0}},
-    {MODKEY, XK_q, killclient, {0}},
+    /* modifier              key                       function        argument */
+    {MODKEY,                 XK_d,                     spawn,          {.v = dmenucmd}}, // dmenu
+    {MODKEY,                 XK_Return,                spawn,          {.v = termcmd}}, // terminal
+    {MODKEY,                 XK_b,                     togglebar,      {0}},
+    {MODKEY | ShiftMask,     XK_j,                     rotatestack,    {.i = +1}},
+    {MODKEY | ShiftMask,     XK_k,                     rotatestack,    {.i = -1}},
+    {MODKEY,                 XK_j,                     focusstack,     {.i = +1}},
+    {MODKEY,                 XK_k,                     focusstack,     {.i = -1}},
+    {MODKEY,                 XK_i,                     incnmaster,     {.i = +1}},
+    {MODKEY,                 XK_u,                     incnmaster,     {.i = -1}},
+    {MODKEY | ControlMask,   XK_h,                     setmfact,       {.f = -0.05}},
+    {MODKEY | ControlMask,   XK_l,                     setmfact,       {.f = +0.05}},
+    {MODKEY | ControlMask,   XK_Return,                zoom,           {0}},
+    {MODKEY | ControlMask,   XK_Tab,                   view,           {0}},
+    {MODKEY,                 XK_q,                     killclient,     {0}},
 
-    /* Layout manipulation */
-    {MODKEY, XK_Tab, cyclelayout, {.i = -1}},
-    {MODKEY | ShiftMask, XK_Tab, cyclelayout, {.i = +1}},
-    {MODKEY, XK_space, setlayout, {0}},
-    {MODKEY | ShiftMask, XK_space, togglefloating, {0}},
+    /* Change layout */
+    {MODKEY,                 XK_Tab,                   cyclelayout,    {.i = -1}},
+    {MODKEY | ShiftMask,     XK_Tab,                   cyclelayout,    {.i = +1}},
+    {MODKEY,                 XK_space,                 setlayout,      {0}},
+    {MODKEY | ShiftMask,     XK_space,                 togglefloating, {0}},
 
     /* Switch to specific layouts */
-    {MODKEY, XK_t, setlayout, {.v = &layouts[0]}},
-    {MODKEY, XK_f, setlayout, {.v = &layouts[1]}},
-    {MODKEY, XK_m, setlayout, {.v = &layouts[2]}},
-    {MODKEY, XK_g, setlayout, {.v = &layouts[3]}},
-
-    {MODKEY, XK_0, view, {.ui = ~0}},
-    {MODKEY | ShiftMask, XK_0, tag, {.ui = ~0}},
+    {MODKEY,                 XK_t,                     setlayout,      {.v = &layouts[0]}},
+    {MODKEY,                 XK_f,                     setlayout,      {.v = &layouts[1]}},
+    {MODKEY,                 XK_m,                     setlayout,      {.v = &layouts[2]}},
+    {MODKEY,                 XK_g,                     setlayout,      {.v = &layouts[3]}},
+    {MODKEY,                 XK_0,                     view,           {.ui = ~0}},
+    {MODKEY | ShiftMask,     XK_0,                     tag,            {.ui = ~0}},
 
     /* Switching between monitors */
-    {MODKEY, XK_l, focusmon, {.i = -1}},
-    {MODKEY, XK_h, focusmon, {.i = +1}},
-    {MODKEY | ShiftMask, XK_l, tagmon, {.i = -1}},
-    {MODKEY | ShiftMask, XK_h, tagmon, {.i = +1}},
+    {MODKEY,                 XK_l,                     focusmon,       {.i = -1}},
+    {MODKEY,                 XK_h,                     focusmon,       {.i = +1}},
+    {MODKEY | ShiftMask,     XK_l,                     tagmon,         {.i = -1}},
+    {MODKEY | ShiftMask,     XK_h,                     tagmon,         {.i = +1}},
 
-    /* Apps Launched with SUPER + ALT + KEY */
-    {MODKEY | Mod1Mask, XK_h, spawn, CMD("st -e ytop")}, // task manager
-    {MODKEY | Mod1Mask, XK_m, spawn, CMD("spotify")}, // spotify
+    /* Launch apps */
+    {MODKEY,                 XK_z,                     spawn,          CMD("zathura")},
+    {MODKEY,                 XK_w,                     spawn,          CMD("$BROWSER")},
+    {MODKEY,                 XK_e,                     spawn,          CMD("dmenuunicode")},
 
-    /* Dmenu scripts launched with ALT + CTRL + KEY */
-    {MODKEY, XK_z, spawn, CMD("zathura")},
-    {MODKEY, XK_w, spawn, CMD("$BROWSER")},
-    {MODKEY, XK_e, spawn, CMD("dmenuunicode")},
-    {Mod1Mask | ControlMask, XK_l, spawn, CMD("slock")},
-    {Mod1Mask | ControlMask, XK_s, spawn, CMD("st -e BROWSER=w3m ddgr $(dmenu -p \"Search\")")},
-    {Mod1Mask | ControlMask | ShiftMask, XK_l, spawn, CMD("/home/pg/.local/bin/dpower")},
-    {MODKEY, XK_Right, spawn, CMD("playerctl next")},
-    {MODKEY, XK_Left, spawn, CMD("playerctl previous")},
-    {MODKEY, XK_Down, spawn, CMD("playerctl play-pause")},
-    {0, XF86XK_AudioPlay, spawn, CMD("playerctl play-pause")},
+    /* Control music */
+    {MODKEY,                 XK_Right,                 spawn,          CMD("playerctl next")},
+    {MODKEY,                 XK_Left,                  spawn,          CMD("playerctl previous")},
+    {MODKEY,                 XK_Down,                  spawn,          CMD("playerctl play-pause")},
+    {0,                      XF86XK_AudioPlay,         spawn,          CMD("playerctl play-pause")},
 
     TAGKEYS(XK_1, 0)
     TAGKEYS(XK_2, 1)
@@ -153,15 +145,19 @@ static Key keys[] = {
     TAGKEYS(XK_7, 6)
     TAGKEYS(XK_8, 7)
     TAGKEYS(XK_9, 8)
-    {MODKEY | ShiftMask, XK_q, quit, {0}},
-    {MODKEY | ShiftMask, XK_r, quit, {1}},
-    {0, XF86XK_AudioMute, spawn,  CMD("pamixer -t && pkill -RTMIN+12 dwmblocks")},
-    {0, XF86XK_AudioRaiseVolume,  spawn, CMD("vol -u && pkill -RTMIN+12 dwmblocks")},
-    {0, XF86XK_AudioLowerVolume,  spawn, CMD("vol -d && pkill -RTMIN+12 dwmblocks")},
-    {0, XK_Print,                 spawn, {.v = screenshot}}, {ControlMask, XK_Print, spawn, {.v = ssselect}},
-    {0, XF86XK_MonBrightnessUp,   spawn, CMD("brightness --up && pkill -RTMIN+11 dwmblocks")},
-    {0, XF86XK_MonBrightnessDown, spawn, CMD("brightness --down && pkill -RTMIN+11 dwmblocks")},
-    {0, XF86XK_TouchpadToggle,    spawn, CMD("touchpad-toggle")},
+    {MODKEY | ShiftMask,     XK_q,                     quit,           {0}},
+    {MODKEY | ShiftMask,     XK_r,                     quit,           {1}},
+    /* System management */
+    {0,                      XF86XK_AudioMute,         spawn,          CMD("pamixer -t && pkill -RTMIN+12 dwmblocks")},
+    {0,                      XF86XK_AudioRaiseVolume,  spawn,          CMD("vol -u && pkill -RTMIN+12 dwmblocks")},
+    {0,                      XF86XK_AudioLowerVolume,  spawn,          CMD("vol -d && pkill -RTMIN+12 dwmblocks")},
+    {0,                      XK_Print,                 spawn,          CMD("wscr -f")},
+    {ControlMask,            XK_Print,                 spawn,          CMD("wscr")},
+    {0,                      XF86XK_MonBrightnessUp,   spawn,          CMD("brightness --up && pkill -RTMIN+11 dwmblocks")},
+    {0,                      XF86XK_MonBrightnessDown, spawn,          CMD("brightness --down && pkill -RTMIN+11 dwmblocks")},
+    {0,                      XF86XK_TouchpadToggle,    spawn,          CMD("touchpad-toggle")},
+    {Mod1Mask | ControlMask, XK_l,                     spawn,          CMD("slock")},
+    {Mod1Mask | ShiftMask,   XK_l,                     spawn,          CMD("dpower")},
 };
 
 /* button definitions */
