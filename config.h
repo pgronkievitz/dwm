@@ -15,24 +15,16 @@ static const int horizpadbar = 7;       /* horizontal padding for statusbar */
 static const int vertpadbar = 7;        /* vertical padding for statusbar */
 static const int swallowfloating = 1;   /* 1 means swallow floating windows by default */
 static const char *fonts[] = {
-    "Hurmit Nerd Font Mono:size=10:antialias=true:autohint=true",
+    "JetBrainsMono Nerd Font Mono:size=10:antialias=true:autohint=true",
     "Hack:size=10:antialias=true:autohint=true",
     "JoyPixels:size=10:antialias=true:autohint=true"
 };
-static const char col_gray1[] = "#262626";
-static const char col_gray2[] = "#262626"; /* border color unfocused windows */
-static const char col_gray4[] = "#d0d0d0";
-static const char col_cyan[] =
-    "#00afaf"; /* border color focused windows and tags */
 static const unsigned int baralpha = 0xff;
 static const unsigned int borderalpha = 0xff;
 static const char *colors[][3] = {
     /*               fg         bg         border   */
     [SchemeNorm] = {"#ABB2BF", "#1E2127", "#61AFEF"},
     [SchemeSel]  = {"#98C379", "#5C6370", "#000000"},
-    [SchemeBat]  = {"#198844", "#1d1f21", "#000000"},
-    [SchemeBri]  = {"#FBA922", "#1d1f21", "#000000"},
-    [SchemeVol]  = {"#3971ED", "#1d1f21", "#000000"},
 };
 static const unsigned int alphas[][3] = {
     /*               fg      bg        border     */
@@ -52,7 +44,7 @@ static const Rule rules[] = {
     // { "Gimp",     NULL,       NULL,       0,            1,           -1 },
     {"Brave-browser",     NULL,  NULL,               1 << 1, 0, 0, 0,  1},   
     {"TelegramDesktop",   NULL,  NULL,               1 << 2, 0, 0, 0,  1},   
-    {"MEGAsync",          NULL,  NULL,               NULL  , 0, 0, 1, -1},  
+    {"MEGAsync",          NULL,  NULL,               NULL,   0, 0, 1, -1},  
     {NULL,                NULL,  "Spotify Premium",  1 << 4, 0, 0, 0,  1},   
     {"Notion",            NULL,  NULL,               1 << 5, 0, 0, 0,  1},   
     {NULL,                NULL,  "Event Tester",     0,      0, 0, 1, -1},   
@@ -68,7 +60,9 @@ static const Layout layouts[] = {
     /* symbol     arrange function */
     {"[]=", tile}, /* first entry is default */
     {"><>", NULL}, /* no layout function means floating behavior */
-    {"[M]", monocle}, {"###", grid}, {NULL, NULL},
+    {"[M]", monocle},
+    {"###", grid},
+    {NULL, NULL},
 };
 
 /* key definitions */
@@ -145,10 +139,10 @@ static Key keys[] = {
     {Mod1Mask | ControlMask, XK_l, spawn, CMD("slock")},
     {Mod1Mask | ControlMask, XK_s, spawn, CMD("st -e BROWSER=w3m ddgr $(dmenu -p \"Search\")")},
     {Mod1Mask | ControlMask | ShiftMask, XK_l, spawn, CMD("/home/pg/.local/bin/dpower")},
-    {MODKEY, XK_Right, spawn, CMD("playerctl next && pkill -RTMIN+10 dwmblocks")},
-    {MODKEY, XK_Left, spawn, CMD("playerctl previous && pkill -RTMIN+10 dwmblocks")},
-    {MODKEY, XK_Down, spawn, CMD("playerctl play-pause && pkill -RTMIN+10 dwmblocks")},
-    {0, XF86XK_AudioPlay, spawn, CMD("playerctl play-pause && pkill -RTMIN+10 dwmblocks")},
+    {MODKEY, XK_Right, spawn, CMD("playerctl next")},
+    {MODKEY, XK_Left, spawn, CMD("playerctl previous")},
+    {MODKEY, XK_Down, spawn, CMD("playerctl play-pause")},
+    {0, XF86XK_AudioPlay, spawn, CMD("playerctl play-pause")},
 
     TAGKEYS(XK_1, 0)
     TAGKEYS(XK_2, 1)
@@ -161,10 +155,9 @@ static Key keys[] = {
     TAGKEYS(XK_9, 8)
     {MODKEY | ShiftMask, XK_q, quit, {0}},
     {MODKEY | ShiftMask, XK_r, quit, {1}},
-    {0, XF86XK_AudioMute, spawn,  CMD("/usr/bin/pactl set-s 12ink-mute 0 toggle && pkill -RTMIN+12 dwmblocks")},
-    {0, XF86XK_AudioRaiseVolume,  spawn, CMD("amixer set Master 5%+ && pkill -RTMIN+12 dwmblocks")},
-    {0, XF86XK_AudioLowerVolume,  spawn, CMD("amixer set Master 5%- && pkill -RTMIN+12 dwmblocks")},
-    {0, XF86XK_AudioMute,         spawn, CMD("amixer set Master toggle && pkill -RTMIN+12 dwmblocks")},
+    {0, XF86XK_AudioMute, spawn,  CMD("pamixer -t && pkill -RTMIN+12 dwmblocks")},
+    {0, XF86XK_AudioRaiseVolume,  spawn, CMD("vol -u && pkill -RTMIN+12 dwmblocks")},
+    {0, XF86XK_AudioLowerVolume,  spawn, CMD("vol -d && pkill -RTMIN+12 dwmblocks")},
     {0, XK_Print,                 spawn, {.v = screenshot}}, {ControlMask, XK_Print, spawn, {.v = ssselect}},
     {0, XF86XK_MonBrightnessUp,   spawn, CMD("brightness --up && pkill -RTMIN+11 dwmblocks")},
     {0, XF86XK_MonBrightnessDown, spawn, CMD("brightness --down && pkill -RTMIN+11 dwmblocks")},
